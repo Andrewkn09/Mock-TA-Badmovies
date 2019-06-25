@@ -1,5 +1,3 @@
-// 
-
 const mongoose = require('mongoose');
 if(process.env.MONGODB_URI){
   mongoose.connect(process.env.MONGODB_URI)
@@ -14,5 +12,7 @@ db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', () => {
   console.log('Connected to db...');
 })
+
+
 
 module.exports.db = db
