@@ -25,7 +25,7 @@ class App extends React.Component {
 
   //gets movies on submit from selected genre in Search componenet
   getMovies(movies) {
-    this.setState({ movies: movies.slice(0, 9) });
+    this.setState({ movies: movies.slice(0, 8) });
   }
 
   saveMovie() {
