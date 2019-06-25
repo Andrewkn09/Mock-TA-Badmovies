@@ -10,8 +10,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: [{ deway: 'movies' }],
-      favorites: [{ deway: 'favorites' }],
+      movies: [],
+      favorites: [],
       showFaves: false
     };
     this.getMovies = this.getMovies.bind(this);
