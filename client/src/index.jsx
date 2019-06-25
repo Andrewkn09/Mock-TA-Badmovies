@@ -15,7 +15,6 @@ class App extends React.Component {
       showFaves: false
     };
     this.getMovies = this.getMovies.bind(this);
-    // you might have to do something important here!
   }
   componentDidMount() {
     Axios.get(`/movies/search/16`)

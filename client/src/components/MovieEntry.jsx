@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class MovieEntry extends Component {
   render() {
-    const { title, poster_path, release_date, popularity } = this.props.movie;
+    const { title, poster_path, release_date, vote_average } = this.props.movie;
     let url = poster_path
       ? `https://image.tmdb.org/t/p/w200/${poster_path}`
       : `https://upload.wikimedia.org/wikipedia/commons/b/b9/No_Cover.jpg`;
@@ -18,7 +18,7 @@ export default class MovieEntry extends Component {
             </div>
             <div className='movie_rating'>
               <span className='title'>Rating</span>
-              <span>{Number(popularity).toFixed(2)}</span>
+              <span>{Number(vote_average).toFixed(2)}</span>
             </div>
           </section>
         </div>
