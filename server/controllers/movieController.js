@@ -4,6 +4,7 @@ const apiHelpers = require('../helpers/apiHelpers.js');
 module.exports = {
   getSearch: (req, res) => {
     let { genre } = req.params;
+    console.log(genre);
     apiHelpers.search(genre).then(results => {
       res.send(results);
     });

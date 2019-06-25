@@ -14,12 +14,18 @@ class App extends React.Component {
       favorites: [{ deway: 'favorites' }],
       showFaves: false
     };
-
+    this.getMovies = this.getMovies.bind(this);
     // you might have to do something important here!
   }
+  componentDidMount() {
+    Axios.get(`/movies/search/16`)
+      .then(({ data }) => this.getMovies(data))
+      .catch(err => console.log(err));
+  }
 
-  getMovies() {
-    // make an axios request to your server on the GET SEARCH endpoint
+  //gets movies on submit from selected genre in Search componenet
+  getMovies(movies) {
+    this.setState({ movies: movies.slice(0, 9) });
   }
 
   saveMovie() {
@@ -48,6 +54,7 @@ class App extends React.Component {
           <Search
             swapFavorites={this.swapFavorites}
             showFaves={this.state.showFaves}
+            handleSubmit={this.getMovies}
           />
           <Movies
             movies={

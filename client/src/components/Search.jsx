@@ -5,12 +5,24 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      genres: []
+      genres: [],
+      selected: 28
     };
-    this.getGenres.bind(this);
+    this.getGenres = this.getGenres.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  //Gets list of movies of selected genre type & updates movie list
+  getGenres() {
+    Axios.get(`/movies/search/${this.state.selected}`)
+      .then(({ data }) => this.props.handleSubmit(data))
+      .catch(err => console.log(err));
   }
 
-  getGenres() {}
+  handleChange(e) {
+    this.setState({
+      selected: e.target.value
+    });
+  }
 
   componentDidMount() {
     return Axios.get('/movies/genres').then(({ data }) => {
@@ -32,18 +44,15 @@ class Search extends React.Component {
         </button>
         <br />
         <br />
-        <select>
+        <select onChange={this.handleChange}>
           {this.state.genres.map(genre => {
             return <Genre key={genre.id} genre={genre} />;
           })}
-          {/* <option value='theway'>The Way</option>
-          <option value='thisway'>This Way</option>
-          <option value='thatway'>That Way</option> */}
         </select>
         <br />
         <br />
 
-        <button>Search</button>
+        <button onClick={this.getGenres}>Search</button>
       </div>
     );
   }
