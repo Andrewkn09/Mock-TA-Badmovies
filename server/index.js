@@ -1,9 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var request = require('request');
+// var request = require('request');
 var app = express();
 
-var apiHelpers = require('./helpers/apiHelpers.js');
+// var apiHelpers = require('./helpers/apiHelpers.js');
 
 app.use(bodyParser.json());
 
