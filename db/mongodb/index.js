@@ -18,6 +18,7 @@ db.once('open', () => {
 const Schema = mongoose.Schema;
 
 const favoritesSchema = new Schema({
+  id: Number,
   title: String,
   poster_path: { type: String, unique: true },
   release_date: String,

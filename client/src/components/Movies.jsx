@@ -6,12 +6,6 @@ class Movies extends React.Component {
     super(props);
   }
 
-  // Make an onClick for each list item. If the movies shown is the search results,
-  // onClick add it to the database (do it in the main app, and pass down the function)
-
-  // If you're currently showing the fave list, delete the movie instead
-  // You can tell which list is currently being rendered based on whether the prop "showFaves" is false (search results) or true (fave list) (within index.jsx)
-
   render() {
     const { movies } = this.props;
     return (
@@ -21,7 +15,7 @@ class Movies extends React.Component {
             <MovieEntry
               key={movie.id}
               movie={movie}
-              handleSave={this.props.handleSave}
+              handleClick={this.props.handleClick}
             />
           );
         })}

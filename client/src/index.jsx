@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Axios from 'axios';
-import $ from 'jquery';
-// import AnyComponent from './components/filename.jsx'
 import Search from './components/Search.jsx';
 import Movies from './components/Movies.jsx';
 
@@ -17,6 +15,8 @@ class App extends React.Component {
     this.updateMovies = this.updateMovies.bind(this);
     this.updateFavorites = this.updateFavorites.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
+    this.swapFavorites = this.swapFavorites.bind(this);
+    this.deleteMovie = this.deleteMovie.bind(this);
   }
 
   componentDidMount() {
@@ -40,17 +40,21 @@ class App extends React.Component {
     });
   }
 
-  saveMovie({ title, release_date, vote_average, poster_path }) {
-    let options = { title, release_date, vote_average, poster_path };
+  saveMovie({ id, title, release_date, vote_average, poster_path }) {
+    console.log('save');
+    let options = { id, title, release_date, vote_average, poster_path };
     Axios.post('/movies/save', options)
       .then(result => {
-        updateFavorites;
+        this.updateFavorites();
       })
       .catch(err => console.log(err));
   }
 
-  deleteMovie() {
-    // same as above but do something diff
+  deleteMovie({ id }) {
+    console.log(id);
+    Axios.delete('/movies/delete', { id }).then(result => {
+      this.updateFavorites();
+    });
   }
 
   swapFavorites() {
@@ -78,7 +82,9 @@ class App extends React.Component {
               this.state.showFaves ? this.state.favorites : this.state.movies
             }
             showFaves={this.state.showFaves}
-            handleSave={this.saveMovie}
+            handleClick={
+              this.state.showFaves ? this.deleteMovie : this.saveMovie
+            }
           />
         </div>
       </div>

@@ -11,5 +11,8 @@ module.exports = {
   },
   get: () => {
     return Favorites.find();
+  },
+  delete: id => {
+    return Favorites.deleteOne(id);
   }
 };

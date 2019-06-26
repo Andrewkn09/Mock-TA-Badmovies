@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class MovieEntry extends Component {
   render() {
-    const { movie, handleSave } = this.props;
+    const { movie, handleClick } = this.props;
     let url = movie.poster_path
       ? `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
       : `https://upload.wikimedia.org/wikipedia/commons/b/b9/No_Cover.jpg`;
@@ -11,7 +11,7 @@ export default class MovieEntry extends Component {
         <img
           src={url}
           onClick={() => {
-            handleSave(movie);
+            handleClick(movie);
           }}
         />
         <div className='movie_description'>

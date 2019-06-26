@@ -36,5 +36,14 @@ module.exports = {
         res.sendStatus(400);
       });
   },
-  deleteMovie: (req, res) => {}
+  deleteMovie: (req, res) => {
+    movieModel
+      .delete(req.body)
+      .then(result => {
+        res.sendStatus(200);
+      })
+      .catch(err => {
+        res.sendStatus(500);
+      });
+  }
 };
