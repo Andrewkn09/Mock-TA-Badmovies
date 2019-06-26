@@ -28,7 +28,6 @@ module.exports = {
     movieModel
       .get()
       .then(result => {
-        console.log(result);
         res.send(result);
       })
       .catch(err => {
