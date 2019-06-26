@@ -4,7 +4,6 @@ const apiHelpers = require('../helpers/apiHelpers.js');
 module.exports = {
   getSearch: (req, res) => {
     let { genre } = req.params;
-    console.log(genre);
     apiHelpers.search(genre).then(results => {
       res.send(results);
     });
@@ -14,6 +13,28 @@ module.exports = {
       res.send(genres);
     });
   },
-  saveMovie: (req, res) => {},
+  saveMovie: (req, res) => {
+    movieModel
+      .save(req.body)
+      .then(result => {
+        res.send(result);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(400);
+      });
+  },
+  getFavorites: (req, res) => {
+    movieModel
+      .get()
+      .then(result => {
+        console.log(result);
+        res.send(result);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(400);
+      });
+  },
   deleteMovie: (req, res) => {}
 };

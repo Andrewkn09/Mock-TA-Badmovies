@@ -2,8 +2,14 @@
 //For SQL
 const sqlDb = require('../../db/sql');
 //For Mongo
-const mongoDb = require('../../db/mongodb')
+// const mongoDb = require('../../db/mongodb')
+const Favorites = require('../../db/mongodb/').Favorites;
 
 module.exports = {
-
-}
+  save: movie => {
+    return Favorites.create(movie);
+  },
+  get: () => {
+    return Favorites.find();
+  }
+};

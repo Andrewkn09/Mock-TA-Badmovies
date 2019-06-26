@@ -17,7 +17,13 @@ class Movies extends React.Component {
     return (
       <ul className='movies'>
         {movies.map(movie => {
-          return <MovieEntry key={movie.id} movie={movie} />;
+          return (
+            <MovieEntry
+              key={movie.id}
+              movie={movie}
+              handleSave={this.props.handleSave}
+            />
+          );
         })}
       </ul>
     );

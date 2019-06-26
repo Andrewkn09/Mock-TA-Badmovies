@@ -18,14 +18,12 @@ db.once('open', () => {
 const Schema = mongoose.Schema;
 
 const favoritesSchema = new Schema({
-  id: Number,
   title: String,
-  poster_path: String,
-  release_date: Number,
+  poster_path: { type: String, unique: true },
+  release_date: String,
   title: String,
-  vote_count: Number
+  vote_average: Number
 });
 
-const favorites = mongoose.model('Favorite', favoritesSchema);
-
-module.exports.db = db;
+const Favorites = mongoose.model('Favorite', favoritesSchema);
+module.exports.Favorites = Favorites;

@@ -15,6 +15,7 @@ class App extends React.Component {
       showFaves: false
     };
     this.getMovies = this.getMovies.bind(this);
+    this.saveMovie = this.saveMovie.bind(this);
   }
   componentDidMount() {
     Axios.get(`/movies/search/16`)
@@ -22,13 +23,27 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
+  //TODO: RENDER FAVORITES
+
   //gets movies on submit from selected genre in Search componenet
   getMovies(movies) {
     this.setState({ movies: movies.slice(0, 8) });
   }
 
-  saveMovie() {
+  saveMovie({ id, title, release_date, vote_average, poster_path }) {
+    let options = { title, release_date, vote_average, poster_path };
     // same as above but do something diff
+    //TODO: UPDATE FAVORITES
+    //DON'T PUSH TO FAVORITES ON SUCCESSFUL GET
+    Axios.post('/movies/save', options)
+      .then(({ data }) => {
+        var favorites = this.state.favorites.slice();
+        favorites.push(data);
+        this.setState({
+          favorites
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   deleteMovie() {
@@ -60,6 +75,7 @@ class App extends React.Component {
               this.state.showFaves ? this.state.favorites : this.state.movies
             }
             showFaves={this.state.showFaves}
+            handleSave={this.saveMovie}
           />
         </div>
       </div>
