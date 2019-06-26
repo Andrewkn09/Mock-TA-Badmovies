@@ -13,8 +13,9 @@ const movieRoutes = require('./routes/movieRoutes.js');
 
 app.use('/movies', movieRoutes);
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+let port = process.env.PORT || 8080;
+app.listen(port, function() {
+  console.log('listening on port ${port}!');
 });
 
 // Sign up and get your moviedb API key here:

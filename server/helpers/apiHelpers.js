@@ -1,6 +1,6 @@
 const request = require('request');
 const axios = require('axios');
-const { API_KEY } = require('../../config.js');
+const { API_KEY } = process.env.API_KEY || require('../../config.js');
 
 // FOR REFERENCE:
 // https://www.themoviedb.org/account/signup
