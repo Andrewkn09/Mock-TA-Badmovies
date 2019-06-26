@@ -14,34 +14,37 @@ class App extends React.Component {
       favorites: [],
       showFaves: false
     };
-    this.getMovies = this.getMovies.bind(this);
+    this.updateMovies = this.updateMovies.bind(this);
+    this.updateFavorites = this.updateFavorites.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
   }
+
   componentDidMount() {
     Axios.get(`/movies/search/16`)
-      .then(({ data }) => this.getMovies(data))
+      .then(({ data }) => {
+        this.updateMovies(data);
+        this.updateFavorites();
+      })
       .catch(err => console.log(err));
   }
 
-  //TODO: RENDER FAVORITES
-
-  //gets movies on submit from selected genre in Search componenet
-  getMovies(movies) {
+  updateMovies(movies) {
     this.setState({ movies: movies.slice(0, 8) });
   }
 
-  saveMovie({ id, title, release_date, vote_average, poster_path }) {
+  updateFavorites() {
+    Axios.get('/movies/favorites').then(({ data }) => {
+      this.setState({
+        favorites: data
+      });
+    });
+  }
+
+  saveMovie({ title, release_date, vote_average, poster_path }) {
     let options = { title, release_date, vote_average, poster_path };
-    // same as above but do something diff
-    //TODO: UPDATE FAVORITES
-    //DON'T PUSH TO FAVORITES ON SUCCESSFUL GET
     Axios.post('/movies/save', options)
-      .then(({ data }) => {
-        var favorites = this.state.favorites.slice();
-        favorites.push(data);
-        this.setState({
-          favorites
-        });
+      .then(result => {
+        updateFavorites;
       })
       .catch(err => console.log(err));
   }
@@ -68,7 +71,7 @@ class App extends React.Component {
           <Search
             swapFavorites={this.swapFavorites}
             showFaves={this.state.showFaves}
-            handleSubmit={this.getMovies}
+            handleSubmit={this.updateMovies}
           />
           <Movies
             movies={
