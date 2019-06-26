@@ -41,20 +41,20 @@ class App extends React.Component {
   }
 
   saveMovie({ id, title, release_date, vote_average, poster_path }) {
-    console.log('save');
     let options = { id, title, release_date, vote_average, poster_path };
     Axios.post('/movies/save', options)
       .then(result => {
         this.updateFavorites();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log('Movie already added'));
   }
 
   deleteMovie({ id }) {
-    console.log(id);
-    Axios.delete('/movies/delete', { id }).then(result => {
-      this.updateFavorites();
-    });
+    Axios.delete('/movies/delete', { id })
+      .then(result => {
+        this.updateFavorites();
+      })
+      .catch(err => console.log('Error deleting'));
   }
 
   swapFavorites() {
